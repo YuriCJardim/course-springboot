@@ -17,7 +17,16 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    public  User (){}
+    public User() {
+
+    }
+
+    public User(String name, String email, String phone, String password) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
 
     public User(long id, String name, String email, String phone, String password) {
         this.id = id;
@@ -50,6 +59,7 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (!(o instanceof User)) return false;
 
         User user = (User) o;
