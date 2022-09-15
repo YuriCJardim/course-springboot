@@ -2,6 +2,8 @@ package br.com.yuricorrea.course.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -13,12 +15,15 @@ public class Category implements Serializable {
     private String name;
 
 
-public Category(){};
+    @Transient
+    private Set<Product> products = new HashSet<>();
+
+    public Category(){};
 
     public Category(Long id, String name) {
         this.id = id;
         this.name = name;
-    }
+          }
 
     public Long getId() {
         return id;
@@ -34,6 +39,10 @@ public Category(){};
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Product> getProduct() {
+        return products;
     }
 
     @Override
