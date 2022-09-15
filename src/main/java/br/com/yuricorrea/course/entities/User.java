@@ -1,12 +1,14 @@
 package br.com.yuricorrea.course.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table( name = "tb_user")
 public class User implements Serializable {
 
     @Id
@@ -17,6 +19,10 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
     public User() {
 
     }
@@ -37,24 +43,34 @@ public class User implements Serializable {
     }
 
     public long getId() {
+
         return id;
     }
 
     public String getName() {
+
         return name;
     }
 
     public String getEmail() {
+
         return email;
     }
 
     public String getPhone() {
+
         return phone;
     }
 
     public String getPassword() {
+
         return password;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
 
     @Override
     public boolean equals(Object o) {
