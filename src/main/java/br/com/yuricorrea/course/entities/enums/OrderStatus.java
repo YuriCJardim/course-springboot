@@ -18,7 +18,7 @@ public enum OrderStatus {
     }
 
 
-    private static OrderStatus valueOf(int code){
+    public static OrderStatus transferring(int code){
         for (OrderStatus value: OrderStatus.values()){
             if (value.getCode() == code){
                 return value;
@@ -26,6 +26,8 @@ public enum OrderStatus {
         }
         throw new IllegalArgumentException("Invalid orderStatus code");
     }
+
+
 
 }
 
