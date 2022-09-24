@@ -2,6 +2,8 @@ package br.com.yuricorrea.course.resources;
 
 import br.com.yuricorrea.course.entities.User;
 import br.com.yuricorrea.course.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
+    Logger logger = LoggerFactory.getLogger(UserResource.class);
 
     @Autowired
     private UserService userService;
@@ -20,12 +23,15 @@ public class UserResource {
 
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
+        logger.info("Obtendo todos os usuarios");
         List<User> list = userService.FindAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
+        logger.info("Obtendo usuario ",id);
+
         User obj = (User) userService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
